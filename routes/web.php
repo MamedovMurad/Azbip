@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
+});
+
+Route::get('login', function () {
+    return view('login');
+});
+Route::get('xeberler', function () {
+    return view('news');
+});
+Route::get('elave-et-xeber', function () {
+    return view('news_form');
 });
