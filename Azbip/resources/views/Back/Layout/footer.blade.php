@@ -22,6 +22,7 @@
 <script src="{{asset('admin/')}}/js/dashboard.js"></script>
 <!-- End custom js for this page-->
 @yield('script')
+
 </body>
 
 
