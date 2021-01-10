@@ -20,7 +20,10 @@
         <h3 class="page-title">
           Data table
         </h3>
+      
         <nav aria-label="breadcrumb">
+          <a href="" class="btn btn-warning btn-sm float-right"><i class="fa fa-trash">&nbsp;  
+          </i>Silinən Məqalələr</a>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Tables</a></li>
             <li class="breadcrumb-item active" aria-current="page">Data table</li>
@@ -67,7 +70,7 @@
                         </td> --}}
                         <td style="display: flex; justify-content:space-around">
                                <a  style=" padding:6px " href="{{route('news.edit', $news->id)}}" title="Redaktə et" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-                               <a  style=" ; padding:6px ; " href="{{route('__invoke', $news->id)}}" title="Sil" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                               <a  style=" ; padding:6px ; " href="{{route('delete.news', $news->id)}}" title="Sil" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                                <a style="  "  href=""> <button class="btn btn-success" style="height: 30px">View</button></a>
                         </td>
                     </tr>

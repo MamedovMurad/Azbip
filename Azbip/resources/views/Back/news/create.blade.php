@@ -9,8 +9,18 @@
         <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Xəbər əlavə et</h4>
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                  <li> {{$error}}</li> 
+                @endforeach
+              </div>
+                  
+              @endif
 
+            <div class="card-body">
+              <h4 class="card-title">Xəbər əlavə et</h4>
+         
               <form method="POST" action="{{route('news.store')}}"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

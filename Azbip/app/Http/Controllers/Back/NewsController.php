@@ -17,7 +17,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function  index()
     {
         $news=News::orderBy('created_at','ASC')->get();
@@ -43,6 +43,10 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'=>'min:3',
+            'image'=>'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
         $news=new News;
         $news->title=$request->title;
         $news->news_category_id=$request->category;
@@ -54,10 +58,10 @@ class NewsController extends Controller
             $request->image->move(public_path('uploads'),$imageName);
             $news->image='/uploads/'.$imageName;
         };
-       
+
         $news->save();
-       
-    
+
+         return redirect()->route('news.index');
     }
 
     /**
@@ -93,6 +97,10 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title'=>'min:3',
+            'image'=>'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
         $news=News::findorFail($id);
         $news->title=$request->title;
         $news->news_category_id=$request->category;
@@ -105,10 +113,10 @@ class NewsController extends Controller
             $news->image='/uploads/'.$imageName;
         };
         $news->save();
-     
+
         return redirect()->route('news.index');
     }
-    public function switch(Request $request){
+    public function switch (Request $request){
         $news=News::findOrFail($request->id);
         $news->status=$request->statu=="true" ? 1 : 0 ;
         $news->save();
@@ -121,9 +129,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function __invoke($id){
+    public function delete($id){
         News::find($id)->delete();
-       
+
         return redirect()->route('news.index');
     }
     public function trashed(){
@@ -132,7 +140,7 @@ class NewsController extends Controller
     }
     public function recover($id){
         News::onlyTrashed()->find($id)->restore();
-       
+
         return redirect()->route('admin.news.index');
     }
     public function hardDelete($id)
@@ -142,8 +150,8 @@ class NewsController extends Controller
             File::delete(public_path($news->image));
         }
         $news->forceDelete();
-      
+
         return redirect()->back();
-    
+
     }
 }

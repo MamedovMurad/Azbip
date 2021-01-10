@@ -14,27 +14,16 @@ use App\Http\Controllers\Front\HomeController;
 |
 */
 
-Route::get('/ll', [HomeController::class, 'index']);
+/* Route::get('/ll', [HomeController::class, 'index']); */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
 
-Route::get('login', function () {
-    return view('login');
-});
-Route::get('xeberler', function () {
-    return view('news');
-});
-Route::get('elave-et-xeber', function () {
-    return view('news_form');
-});
 
 //Xeberler
-Route::get('/delete/news/{id}', NewsController::class, '__invoke')->name('__invoke');
+Route::get('/delete/news/{id}', [NewsController::class, 'delete'])->name('delete.news');
+/* Route::resource('/news', [NewsController::class]); */
+Route::get('/news/silinenler', [NewsController::class, 'trashed'])->name('trashed.news');
+Route::get('/switch', [NewsController::class, 'switch'])->name('switch');
 Route::resource('/news', NewsController::class);
-Route::get('/news/silinenler', NewsController::class, 'trashed', ['name' => 'trashed.news'] );
-Route::get('/switch', NewsController::class, 'switch', ['name' => 'switch'] );
 
-Route::get('/harddelete/news/{id}', NewsController::class, 'hardDelete', ['name' => 'hard.delete.news'] );
-Route::get('/recover/news/{id}', NewsController::class, 'recover', ['name' => 'recover.news'] );
+Route::get('/harddelete/news/{id}', [NewsController::class, 'hardDelete'])->name('hard.delete.news');
+Route::get('/recover/news/{id}', [NewsController::class, 'recover'])->name('recover.news');
