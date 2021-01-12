@@ -1,5 +1,5 @@
 
-@extends('Layout.master')
+@extends('Back.Layout.master')
 
 @section('content')
       <!-- partial -->

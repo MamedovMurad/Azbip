@@ -19,6 +19,7 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('admin/')}}/../../images/favicon.html" />
   @yield('css')
+  @toastr_css
 </head>
 <body>
 

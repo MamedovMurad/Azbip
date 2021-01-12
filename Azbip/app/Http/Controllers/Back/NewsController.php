@@ -114,7 +114,7 @@ class NewsController extends Controller
         };
         $news->save();
 
-        return redirect()->route('news.index');
+        return redirect()->route('admin.news.index');
     }
     public function switch (Request $request){
         $news=News::findOrFail($request->id);

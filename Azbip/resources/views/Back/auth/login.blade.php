@@ -17,9 +17,9 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <script src="https://kit.fontawesome.com/b58e494fbb.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{asset('admin/')}}/css/style.css">
+  <link rel="stylesheet" href="{{asset('admin/')}}/../css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <link rel="shortcut icon" href="{{asset('admin/')}}/../../images/favicon.png" />
 </head>
 
 <body>
@@ -30,20 +30,27 @@
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="{{asset('admin/')}}/../../images/logo.svg" alt="logo">
               </div>
               <h4>Welcome back!</h4>
               <h6 class="font-weight-light">Happy to see you again!</h6>
-              <form class="pt-3">
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                {{$errors->first()}}
+              </div>
+                    
+                @endif
+              <form method="POST" action="{{route('admin.login.post')}}" class="pt-3">
+                @csrf
                 <div class="form-group">
-                  <label for="exampleInputEmail">Username</label>
+                  <label for="exampleInputEmail">Email</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-transparent">
                       <span class="input-group-text bg-transparent border-right-0">
                         <i class="fa fa-user text-primary"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username">
+                    <input type="email" name="email" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Email ">
                   </div>
                 </div>
                 <div class="form-group">
@@ -54,13 +61,13 @@
                         <i class="fa fa-lock text-primary"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password">
                   </div>
                 </div>
 
-                <div class="my-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">LOGIN</a>
-                </div>
+                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                 LOGIN
+                </button>
 
 
               </form>
